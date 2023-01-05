@@ -8,17 +8,19 @@ import java.util.List;
 
 public class DummyUser implements UserDetails {
 
-    private String userName;
-    private String password;
+    private final String userName;
+    private final String password;
+    private final String authority;
 
-    public DummyUser(String userName, String password) {
+    public DummyUser(String userName, String password, String authority) {
         this.userName = userName;
         this.password = password;
+        this.authority = authority;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        return List.of(() -> authority);
     }
 
     @Override
